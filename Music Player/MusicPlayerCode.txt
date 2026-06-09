@@ -1,0 +1,109 @@
+int main()
+
+{
+
+  cout << "Music Player!\n";
+
+
+
+
+
+  auto song1{"MI.MPX"};     // hardcoded
+
+  auto song2{"MHALL.mpx"};    // hardcoded.
+
+
+
+  char select;
+
+  do {
+
+    cout <<"1...."<< song1 << endl;
+
+    cout <<"2...."<< song2 << endl;
+
+    cout <<"Select 1 or 2:";
+
+    cin >> select;
+
+  } while ( select!='1' && select!='2' );
+
+
+
+  auto theSong {""};
+
+  switch (select) {
+
+  case '1': theSong=song1;
+
+       break;
+
+  case '2': theSong=song2;
+
+       break;
+
+  }
+
+
+
+
+
+  ifstream FileInput(theSong);
+
+
+
+  cout <<"you have selected: "<< theSong << endl;
+
+  if ( !FileInput.is_open()) {
+
+    cout << theSong << " not found\n";
+
+    exit(0);  // crash and burn sooner then later.
+
+  }
+
+
+
+  int freq, duration;
+
+
+
+  do
+
+  {
+
+    FileInput >> freq >> duration;
+
+    Beep(freq, duration);   // Microsoft API
+
+
+
+    cout << freq <<" .... "<<duration << endl;
+
+
+
+  }while ( !FileInput.eof() ) ; // if it worked, then true.
+
+
+
+  FileInput.close();
+
+
+
+  cout << "Thanks for using the Music Player\n";
+
+
+
+}
+
+////////////////////
+
+using std::cout;
+
+using std::endl;
+
+using std::cin;
+
+using std::ifstream;
+
+using std::string;
